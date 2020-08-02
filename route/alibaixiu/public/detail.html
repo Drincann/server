@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<script src="/ali/login/status"></script>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>阿里百秀-发现生活，发现美!</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/vendors/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="assets/vendors/nprogress/nprogress.css">
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="topnav">
+            <ul id="topnavBox">
+            </ul>
+
+
+        </div>
+
+        <div class="header">
+            <h1 class="logo"><a href="index.html" id="logo"></a></h1>
+
+            <ul class="nav" id="navBox">
+            </ul>
+            <div class="search">
+                <form>
+                    <input type="text" class="keys" placeholder="输入关键字">
+                    <input type="submit" class="btn" value="搜索">
+                </form>
+            </div>
+            <ul class="nav" id="login">
+            </ul>
+        </div>
+
+        <div class="aside">
+            <div class="widgets">
+                <h4>搜索</h4>
+                <div class="body search">
+                    <form>
+                        <input type="text" class="keys" placeholder="输入关键字">
+                        <input type="submit" class="btn" value="搜索">
+                    </form>
+                </div>
+            </div>
+            <div class="widgets" id="randomBox">
+
+            </div>
+            <div class="widgets" id="articleCommentsBox">
+
+            </div>
+        </div>
+        <div class="content">
+            <div class="article" id="articleBox">
+            </div>
+
+            <div id="submitCommentsBox"></div>
+
+            <div class="panel hots" id="recommendBox">
+            </div>
+
+        </div>
+
+        <div class="footer">
+            <p>© 2016 XIU主题演示 本站主题由 themebetter 提供</p>
+        </div>
+    </div>
+
+    <script type="text/html" id="articleTpl">
+            <div class="breadcrumb">
+                <dl>
+                    <dt>当前位置：</dt>
+                    <dd><a href="javascript:;">{{category.title}}</a></dd>
+                    <dd>{{title}}</dd>
+                </dl>
+            </div>
+            <h2 class="title">
+                <a href="javascript:;">{{title}}</a>
+            </h2>
+            <div class="meta">
+                <span>{{author.nickName}} 发布于 {{$imports.dateFormat(createAt)}}</span>
+                <span>分类: <a href="javascript:;">{{category.title}}</a></span>
+                <span>阅读: ({{meta.views}})</span>
+                <span>评论: ({{meta.comments}})</span>
+                <a href="javascript:;" class="like" data-id={{_id}}>
+                    <i class="fa fa-thumbs-up"></i>
+                    <span>赞({{meta.likes}})</span>
+                </a>
+            </div>
+            {{@content}}
+
+    </script>
+
+    <script type="text/html" id="articleCommentsTpl">
+        <h4>文章评论</h4>
+        <ul class="body discuz">
+            {{each}}
+            <li>
+                <a href="detail.html?_id={{$value.post}}">
+                    <div class="avatar">
+                        <img style="object-fit:cover;"
+                            src={{$value.author.avatar != '' ? '/ali' + $value.author.avatar : '/ali/assets/img/default.jpg'}}
+                            alt="">
+                    </div>
+                    <div class="txt">
+                        <p>
+                            <span>{{$value.author.nickName}}</span>{{$imports.dateFormat($value.createAt)}}:
+                        </p>
+                        <p>{{$value.content}}</p>
+                    </div>
+                </a>
+            </li>
+            {{/each}}
+        </ul>
+    </script>
+
+    <script type="text/html" id="commentsTpl">
+        <style type="text/css">
+            .comment {
+                margin-bottom: 20px;
+            }
+    
+            .comment textarea {
+                box-sizing: border-box;
+                padding: 10px;
+                width: 100%;
+                height: 80px;
+                display: block;
+            }
+    
+            .comment input {
+                width: 100px;
+                height: 30px;
+                margin-top: 10px;
+            }
+        </style>
+        <div class="comment">
+            <div>
+                <textarea></textarea>
+                <input type="submit" id="submit" value="提交评论">
+            </div>
+        </div>
+    </script>
+    <script src="assets/vendors/jquery/jquery.js"></script>
+    <script src="assets/vendors/nprogress/nprogress.js"></script>
+    <script src="https://cdn.bootcss.com/highlight.js/9.18.1/highlight.min.js"></script>
+    <link href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/solarized-dark.min.css" rel="stylesheet">
+    <script src="./assets/vendors/art-template/template-web.js"></script>
+    <script src="./assets/js/public.js"></script>
+    <script src="./assets/js/detail.js"></script>
+
+</body>
+
+</html>

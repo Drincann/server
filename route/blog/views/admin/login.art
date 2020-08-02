@@ -1,0 +1,45 @@
+{{extend './common/layout.art'}} {{block 'main'}}
+<div class="login-body">
+    <div class="login-container">
+        <h4 class="title">登录</h4>
+        {{@info ? info : ''}}
+        <div class="login">
+            <form action="login" method="POST" id="loginForm">
+                <div class="form-group">
+                    <label>邮件</label>
+                    <input name="email" type="email" class="form-control" placeholder="请输入邮件地址" value="{{email}}">
+                </div>
+                <div class="form-group">
+                    <label>密码</label>
+                    <input name="password" type="password" class="form-control" placeholder="请输入密码" value="{{password}}">
+                </div>
+                <button type="submit" class="btn btn-primary">登录</button>
+                <a class="btn btn-primary" href="register">注册账号</a>
+            </form>
+        </div>
+        <div class="tips"></div>
+    </div>
+</div>
+{{/block}} {{block 'script'}}
+
+<script>
+    <%if(info){%>
+    $('input[name="password"]').focus();
+    <%}else{%>
+    $('input[name="email"]').focus();
+    <%}%>
+    $('#loginForm').on('submit', function() {
+        // 阻止表单默认提交，验证表单数据
+        var formData = serializeToJson($(this));
+        if (formData.email.trim().length == 0) {
+            alert('请输入 email');
+            return false;
+        }
+        if (formData.password.trim().length == 0) {
+            alert('请输入 密码');
+            return false;
+        }
+    })
+</script>
+
+{{/block}}

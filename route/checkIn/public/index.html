@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hebau check in</title>
+    <link rel="stylesheet" href="./plug/bootstrap4/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f5f5f5;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="info">
+
+        </div>
+
+        <div class="row pt-5 justify-content-center">
+            <button type="button" class="btn btn-secondary col-auto mr-2" id="getData">开始查询</button>
+            <button type="button" class="btn btn-secondary col-auto" id="filter">只看未签到</button>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-12"></div>
+        </div>
+        <div class="row pt-3 justify-content-center">
+
+            <ul class="list-group col-auto p-0 pb-3" id="stuList">
+                <li class="list-group-item" stu-id="2019984040530"> 2019984040530 白欣雨 </li>
+                <li class="list-group-item" stu-id="2019984040529"> 2019984040529 冯心雨 </li>
+                <li class="list-group-item" stu-id="2019984040528"> 2019984040528 胡铭丹 </li>
+                <li class="list-group-item" stu-id="2019984040527"> 2019984040527 李喜威 </li>
+                <li class="list-group-item" stu-id="2019984040526"> 2019984040526 刘素敏 </li>
+                <li class="list-group-item" stu-id="2019984040525"> 2019984040525 孟轩 </li>
+                <li class="list-group-item" stu-id="2019984040524"> 2019984040524 孙文华 </li>
+                <li class="list-group-item" stu-id="2019984040523"> 2019984040523 谢艳艳 </li>
+                <li class="list-group-item" stu-id="2019984040522"> 2019984040522 张红叶 </li>
+                <li class="list-group-item" stu-id="2019984040521"> 2019984040521 柴金鹏 </li>
+                <li class="list-group-item" stu-id="2019984040520"> 2019984040520 樊苗 </li>
+                <li class="list-group-item" stu-id="2019984040519"> 2019984040519 高俊康 </li>
+                <li class="list-group-item" stu-id="2019984040518"> 2019984040518 韩文俊 </li>
+                <li class="list-group-item" stu-id="2019984040517"> 2019984040517 贾迎达 </li>
+                <li class="list-group-item" stu-id="2019984040516"> 2019984040516 孔德飞 </li>
+                <li class="list-group-item" stu-id="2019984040514"> 2019984040514 刘佳林 </li>
+                <li class="list-group-item" stu-id="2019984040513"> 2019984040513 刘星皓 </li>
+                <li class="list-group-item" stu-id="2019984040512"> 2019984040512 路世广 </li>
+                <li class="list-group-item" stu-id="2019984040511"> 2019984040511 孟锡瑞 </li>
+                <li class="list-group-item" stu-id="2019984040510"> 2019984040510 任晨浩 </li>
+                <li class="list-group-item" stu-id="2019984040509"> 2019984040509 佟佳辉 </li>
+                <li class="list-group-item" stu-id="2019984040508"> 2019984040508 王思涵 </li>
+                <li class="list-group-item" stu-id="2019984040507"> 2019984040507 未一博 </li>
+                <li class="list-group-item" stu-id="2019984040506"> 2019984040506 许颖 </li>
+                <li class="list-group-item" stu-id="2019984040505"> 2019984040505 杨得华 </li>
+                <li class="list-group-item" stu-id="2019984040504"> 2019984040504 尹天豪 </li>
+                <li class="list-group-item" stu-id="2019984040503"> 2019984040503 张浩德 </li>
+                <li class="list-group-item" stu-id="2019984040502"> 2019984040502 张荣旺 </li>
+                <li class="list-group-item" stu-id="2019984040501"> 2019984040501 赵尉君 </li>
+
+                <!-- 
+                <li class="list-group-item list-group-item-success">This is a success list group item</li>
+                <li class="list-group-item list-group-item-danger">This is a danger list group item</li>
+
+                <li class="list-group-item list-group-item-light">This is a light list group item</li>
+                <li class="list-group-item list-group-item-dark">This is a dark list group item</li> -->
+            </ul>
+        </div>
+        <div class="row justify-content-center pb-2">
+            <div class="col-auto">
+                Powered by <a href="https://gaolihai.top" target="_blank">@高厉害</a>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="./plug/bootstrap4/js/bootstrap.min.js"></script>
+    <script>
+        // ajax Promise 封装
+        function ajaxAsync(options) {
+            return new Promise((resolve, reject) => {
+                let { success, error } = options;
+                delete options.success;
+                delete options.error;
+                $.ajax(options)
+                    .done(function (data) {
+                        success(data);
+                        resolve(data);
+                    }).fail(function (xhr) {
+                        error(xhr);
+                        reject(xhr);
+                    });
+            });
+        }
+
+        // 以每个列表元素作为参数封装 Promise，用来并发请求
+        function getPromise(element) {
+            return ajaxAsync({
+                url: 'isCheckIn',
+                data: {
+                    studentid: $(element).attr('stu-id')
+                },
+                success: function (data) {
+                    if (data.result.text.indexOf('已签到') != -1) {
+                        $(element).addClass('list-group-item-success');
+
+                    } else {
+                        $(element).addClass('list-group-item-danger');
+                    }
+                },
+                error: function (xhr) {
+                    $(element).addClass('list-group-item-dark');
+                }
+            });
+        }
+
+
+        // 信息提示
+        // 渲染
+        function renderInfo(info, infinite) {
+            delInfo(function () {
+                $('#info').html(info);
+                if (infinite) {
+                    $('#info').children().fadeIn(300).delay(3000).fadeOut(500);
+                } else {
+                    $('#info').children().fadeIn(300);
+                }
+            })
+        }
+
+        // 删除提示框
+        // 删除有动画，传 callback 进来，动画结束回调
+        function delInfo(callback) {
+            //
+            if (!$('#info').children().length) {
+                return callback();
+            }
+            $('#info').children().fadeOut(callback);
+        }
+
+        // 封装过滤逻辑
+        function filter(renderAll) {
+            if (renderAll) {
+                $('#stuList').children().stop().slideDown();
+            } else {
+                $('#stuList').children().filter((i, ele) => $(ele).hasClass('list-group-item-success')).stop().fadeOut();
+            }
+        }
+
+        $('#getData').on('click', function (e) {
+            // 初始化
+            // 列表初始化
+            let stuList = $('#stuList').children();
+            stuList.removeClass('list-group-item-success');
+            stuList.removeClass('list-group-item-danger');
+            stuList.removeClass('list-group-item-dark');
+            stuList.stop().slideDown()
+
+            // 按钮初始化 + 禁用
+            $(this).attr('disabled', true);
+            $('#filter').attr('disabled', true);
+
+            // 渲染
+            renderInfo(`
+                    <div class="alert alert-info fixed-top" role="alert" style="display: none;">
+                        正在查询...
+                    </div>
+                    `);
+
+            // 并行请求
+            Promise.all(stuList.map((index, value) => getPromise(value)).get())
+                .then((data) => {
+                    // 恢复按钮禁用
+                    $(this).removeAttr('disabled');
+                    $('#filter').removeAttr('disabled');
+
+                    delInfo();
+                    filter($(this).html() == '只看未签到'); // 调用过滤逻辑
+                })
+                .catch((xhr) => {
+                    // 恢复按钮禁用
+                    $(this).removeAttr('disabled');
+                    $('#filter').removeAttr('disabled');
+
+                    // 渲染错误框
+                    renderInfo(`
+                    <div class="alert alert-danger fixed-top" role="alert" style="display: none;">
+                        服务端错误：${xhr.responseText}
+                    </div>
+                    `, 3000);
+                });
+        });
+
+        // 过滤器切换逻辑
+        $('#filter').on('click', function (e) {
+            if ($(this).html() == '只看未签到') {
+                $(this).html('显示所有');
+            } else {
+                $(this).html('只看未签到');
+            }
+            filter($(this).html() == '只看未签到'); // 调用过滤逻辑
+        });
+
+
+    </script>
+</body>
+
+</html>

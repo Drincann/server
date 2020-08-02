@@ -1,0 +1,22 @@
+    <!-- 头部框架开始 -->
+    <div class="header">
+        <div class="w1100">
+            <a class="fl author" target="_blank" style="line-height:60px;font-size:25px;" href="https://gaolihai.top">@高厉害</a>
+            <!-- 网站logo开始 -->
+            <h1 class="logo fl">
+                <a href="index"><img src="/blog/home/images/logo.png" alt="黑马程序员"></a>
+            </h1>
+            <!-- 网站logo结束 -->
+            <!-- 网站导航开始 -->
+            <ul class="navigation fr">
+                <li>
+                    <a class="active" href="index">首页</a>
+                </li>
+                <li>
+                    <a href="/blog/admin/login">{{userInfo ? '个人中心' : '登录'}}</a>
+                </li>
+            </ul>
+            <!-- 网站导航结束 -->
+        </div>
+    </div>
+    <!-- 头部框架结束 -->

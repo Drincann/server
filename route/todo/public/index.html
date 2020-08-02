@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="/todo/assets/css/base.css">
+    <link rel="stylesheet" href="/todo/assets/css/index.css">
+</head>
+
+<body>
+    <section class="todoapp">
+        <header class="header">
+            <h1>todos</h1>
+            <input class="new-todo" placeholder="What needs to be done?" autofocus id="addTask">
+        </header>
+        <!-- This section should be hidden by default and shown when there are todos -->
+        <section class="main">
+            <input class="toggle-all" type="checkbox">
+            <label for="toggle-all">Mark all as complete</label>
+            <ul class="todo-list" id="todoList">
+                <!-- These are here just to show the structure of the list items -->
+                <!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
+
+            </ul>
+        </section>
+        <!-- This footer should hidden by default and shown when there are todos -->
+        <footer class="footer">
+            <!-- This should be `0 items left` by default -->
+            <span class="todo-count"><strong>0</strong> item left</span>
+            <!-- Remove this if you don't implement routing -->
+            <ul class="filters">
+                <li>
+                    <a id="all" class="selected" href="javascript:;" onclick="currentFilters='true'">All</a>
+                </li>
+                <li>
+                    <a id="active" href="javascript:;" onclick="currentFilters='item.completed == false'">Active</a>
+                </li>
+                <li>
+                    <a id="complete" href="javascript:;" onclick="currentFilters='item.completed == true'">Completed</a>
+                </li>
+            </ul>
+            <!-- Hidden if no completed items are left ↓ -->
+            <button class="clear-completed" id="clearComplated">Clear completed</button>
+        </footer>
+
+        <script type="text/html" id="taskTpl">
+            {{each taskArr}}
+            <li {{$value.completed ? 'class=completed' : ''}}>
+                <div class="view">
+                    <!-- <input class="toggle" type="checkbox" {{$value.completed ? 'checked' : ''}}> -->
+                    <label class="title">{{$value.title}}</label>
+                    <button class="destroy" _id={{$value._id}}></button>
+                </div>
+                <input class="edit" value="{{@$value.title}}">
+            </li>
+            {{/each}}
+        </script>
+
+        <script type="text/html">
+
+        </script>
+    </section>
+    <script src="https://cdn.bootcss.com/jquery/3.5.0/jquery.js"></script>
+    <script src="/todo/js/template-web.js"></script>
+    <link href="https://cdn.bootcss.com/nprogress/0.2.0/nprogress.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/nprogress/0.2.0/nprogress.js"></script>
+    <script src="/todo/js/index.js"></script>
+    <script src="http://qzonestyle.gtimg.cn/qzone/qzact/common/share/share.js"></script>
+    <script>
+        var taskBox = $('#todoList')
+        var taskArr = [];
+        // 获取列表
+        refresh();
+
+        // 添加任务
+        $('#addTask').on('keyup', function (e) {
+            if (e.keyCode == 13) {
+                var title = $(this).val().trim();
+                $(this).val('');
+                if (title !== '') {
+                    $.post('/todo/addTask', { title }, function () {
+                        refresh();
+                    });
+                }
+            }
+        });
+
+        // 删除任务
+        $('#todoList').on('click', '.destroy', function () {
+            $.get('/todo/deleteTask', { _id: $(this).attr('_id') }, function () {
+                refresh();
+            });
+        });
+
+        // 删除已完成任务
+        $('#clearComplated').on('click', function () {
+            $.get('/todo/clearTask', function () {
+                refresh();
+            })
+        })
+
+        var click = false;
+
+
+
+        // 修改任务
+        dblclick(taskBox, '.title', function () {
+            var li = $(this).parent().parent();
+            var edit = $(this).parent().siblings('.edit');
+            li.addClass('editing');
+            edit.focus().select();
+            edit.on({
+                'blur': function () {
+                    var title = $(this).val();
+                    var _id = $(this).siblings().children('.destroy').attr('_id');
+                    $(li.removeClass('editing'));
+                    $.post('/todo/modifyTask', { _id, title }, function () {
+                        refresh();
+                    });
+                },
+                'keyup': function (e) {
+                    if (e.keyCode == 13) {
+                        var title = $(this).val();
+                        var _id = $(this).siblings().children('.destroy').attr('_id');
+                        $(li.removeClass('editing'));
+                        $.post('/todo/modifyTask', { _id, title }, function () {
+                            refresh();
+                        });
+                    }
+                }
+            })
+
+        }, function () {
+            var _id = $(this).siblings('button').attr('_id');
+            var completed = !$(this).parent().parent().hasClass('completed');
+
+            $.post('/todo/modifyTask', { _id, completed }, function () {
+                refresh();
+            });
+        })
+
+        // all active completed toggle
+        var filters = $('.filters');
+        var all = $('#all');
+        var active = $('#active');
+        var completed = $('#completed');
+        filters.on('click', 'a', function () {
+
+            if ($(this).hasClass('selected')) return;
+            $(this).addClass('selected').parent().siblings().children().removeClass('selected');
+            taskBox.html(template('taskTpl', {
+                taskArr: taskArr.filter(function (item) {
+                    console.log(eval(currentFilters));
+                    return eval(currentFilters);
+                })
+            }));
+        })
+
+
+        function refresh() {
+            var count = $('.todo-count').children();
+            $.get('/todo/task', function (data) {
+                taskArr = data;
+                taskBox.html(template('taskTpl', { taskArr: data }));
+            });
+            // count
+            $.get('/todo/unCompletedTaskCount', function ({ num }) {
+                count.html(num);
+            })
+        }
+    </script>
+
+</body>
+
+</html>

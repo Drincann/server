@@ -1,0 +1,81 @@
+body {
+    background-color: #f5f5f5;
+}
+
+ul,
+li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.fullscreen{
+    padding:0 ;
+}
+
+#result,
+#facePreview,#shareImg {
+    width: 100%;
+}
+
+#result {
+    object-fit: cover;
+}
+
+.match .face-list {
+    width: 100%;
+    height: 180px;
+    vertical-align: middle;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+
+}
+
+.match .face-item {
+    width: 100px;
+    height: 150px;
+    display: inline-block;
+    margin: 0 10px 10px;
+    box-shadow: 0 1px 6px 2px rgba(1, 1, 1, 0.6);
+    border-radius: 2px;
+    border: 2px solid rgba(1, 1, 1, 0.6);
+    transition: all 0.2s;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.match .face-item-active {
+    width: 100px;
+    height: 150px;
+    transform: translateY(15px) scale(1.05);
+    display: inline-block;
+    margin: 0 10px 10px;
+    box-shadow: 0 1px 10px 4px rgba(1, 1, 1, 0.8);
+    border-radius: 2px;
+    border: 2px solid #68d0ff;
+    transition: all 0.2s;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.match img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#shareCanvas{
+    width: 100%!important;
+}
+
+body {
+    background: url('/faceWrap/img/bg.jpg') no-repeat center 245px;
+    background-size: 100%;
+}
+
+.jumbotron {
+    background: url('/faceWrap/img/landscape1.jpg') no-repeat center top;
+    background-size: 1920px;
+}

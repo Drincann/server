@@ -1,0 +1,31 @@
+﻿{
+    "blog": {
+        "info": "博客管理系统 ---- 生产环境",
+        "db": {
+            "user": "blog",
+            "pwd": "745663",
+            "host": "localhost",
+            "port": "27017",
+            "name": "blog"
+        }
+    },
+    "admin": {
+        "db": {
+            "user": "gaolihai",
+            "pwd": "745663",
+            "host": "localhost",
+            "port": "27017",
+            "name": "firstDB?authSource=admin"
+        }
+    },
+    "ali": {
+        "db": {
+            "user": "gaolihai",
+            "pwd": "745663",
+            "host": "localhost",
+            "port": "27017",
+            "name": "alibaixiu?authSource=admin"
+        }
+    },
+    "notFoundPage": "/404.html"
+}

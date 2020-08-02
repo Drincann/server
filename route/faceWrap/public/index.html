@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>faceWrap</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/share.css">
+</head>
+
+<body>
+    <div class="fullscreen">
+        <div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">保存和分享</h5>
+                        <button type="button" style="outline: none;" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="alert alert-success col text-center" role="alert">
+                                    长按图片保存
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <img class="col img-thumbnail" id="shareImg" src="./uploads/default.png">
+                                    <canvas class="col img-thumbnail" id="shareCanvas" style="display: none;"></canvas>
+                                </div>
+                            </div>
+
+                            <div class="social-share row pt-3 text-center" id="shareBox">
+                                <div class="col">
+                                    <a id="shareQq" class="social-share-icon icon-qq" target="_blank"
+                                        href="http://connect.qq.com/widget/shareqq/index.html?url={{url}}&title={{title}}&source={{source}}&desc={{desc}}&pics={{image}}&summary={{summary}}"
+                                        data-target="qqFriend"></a>
+                                </div>
+                                <div class="col">
+                                    <a id="shareQzone" class="social-share-icon icon-qzone" target="_blank"
+                                        href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url={{url}}&title={{title}}&desc={{desc}}&summary={{summary}}&site={{source}}&pics={{image}}"
+                                        data-target="qZone"></a>
+                                </div>
+                                <div class="col">
+                                    <a id="shareWeibo" class="social-share-icon icon-weibo" target="_blank"
+                                        href="https://service.weibo.com/share/share.php?url={{url}}&title={{title}}&pic={{image}}&appkey={{weibokey}}"
+                                        data-target="weibo"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="jumbotron m-0">
+            <h1 class="display-4 text-center" style="visibility: hidden;">毕业照</h1>
+            <p class="lead text-center">请查收专属于<br />
+                <span class="text-success" style="font-weight:700 ;">河北农业大学理工学院</span><br />
+
+                <span class="text-info" style="font-weight:700 ;">计算机科学与技术专业</span>学生的毕业照</p>
+        </div>
+
+        <div id="infoBox">
+            <div class="alert alert-secondary col text-center" role="alert" id="alertSelect">
+                左右滑动下方选择模板预览，点击右侧上传图片(< 2MB) </div>
+            </div>
+            <div class="content">
+                <div class="row px-5" id="loading" style="display: none;">
+                    <div class="col">
+                        <div class="d-flex align-items-center">
+                            <strong>Loading...</strong>
+
+                            <div class="spinner-border ml-auto text-secondary" style="width: 3rem; height: 3rem;"
+                                role="status" aria-hidden="true">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="match px-5 py-3">
+                            <div class="slide row">
+                                <ul class="face-list .align-items-center" id="faceList">
+                                    <!-- template -->
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-6">
+                        <img class="col img-thumbnail" id="facePreview" alt="">
+                    </div>
+
+                    <div class="col-6">
+                        <img class="col img-thumbnail" id="result" src="./uploads/default.png">
+                        <input id="upload" type="file" style="display: none;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="small text-center pt-5">
+
+            Powered by <a href="https://gaolihai.top">@高厉害</a> & <a href="https://www.faceplusplus.com.cn/">Face++
+                api</a> | 策划：张卫丹
+
+        </p>
+
+
+        <script type="text/html" id="infoTpl">
+        <div class="alert {{@classText}} col text-center" role="alert" id="info" style="display: none;">
+            {{infoText}}
+        </div>
+    </script>
+        <script type="text/html" id="faceListTpl">
+        {{each}}
+        <li class="face-item" data-index={{$index}}>
+            <img src={{$value}} alt=""/>
+        </li>
+        {{/each}}
+    </script>
+
+
+
+        <script src="./assets/template.js"></script>
+        <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+        <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/jquery.share.min.js"></script> -->
+        <!-- <script src="./js/canvas2image.js"></script> -->
+        <script src="./assets/NativeShare.js"></script>
+        <script src="./js/drawBar.js"></script>
+        <script src="./js/index.js"></script>
+
+</body>
+
+</html>

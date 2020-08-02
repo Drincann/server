@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<script src="../login/status"></script>
+<script>
+    console.log(isLogin);
+    if (isLogin) {
+        if (isAdmin) {
+            location.href = '/ali/admin/index.html';
+        } else {
+            location.href = '/ali/index.html';
+        }
+    }
+</script>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>Sign in &laquo; Admin</title>
+    <link rel="stylesheet" href="../assets/vendors/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+
+<body>
+    <div class="login">
+        <div class="login-wrap">
+            <img class="avatar" src="../assets/img/default.png">
+            <div id="info">
+
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="sr-only">邮箱</label>
+                <input id="email" type="email" class="form-control" placeholder="邮箱" autofocus>
+            </div>
+            <div class="form-group">
+                <label for="password" class="sr-only">密码</label>
+                <input id="password" type="password" class="form-control" placeholder="密码">
+            </div>
+            <button id="btn" class="btn btn-primary btn-block">登 录</button>
+        </div>
+    </div>
+    <script type="text/html" id="tplInfo">
+    <div class="alert alert-danger">
+        <strong>错误！</strong> 
+        {{message}}
+    </div>
+    </script>
+    <script src="https://cdn.bootcss.com/jquery/3.5.0/jquery.min.js"></script>
+    <script src="../assets/vendors/art-template/template-web.js"></script>
+    <script>
+        var email = $('#email');
+        var password = $('#password');
+        var loginBtn = $('#btn');
+        var info = $('#info');
+
+
+        loginBtn.on('click', function () {
+            if (email.val().trim().length == 0 || password.val().trim().length == 0) {
+                info.html(template('tplInfo', { message: '请输入邮箱和密码' }));
+            } else {
+                $.post('/ali/login', { email: email.val(), password: password.val() }, function (data) {
+                    info.html('');
+                    if (data.role == 'admin') {
+                        location.href = '/ali/admin/index.html';
+                    } else {
+                        location.href = '/ali/index.html';
+                    }
+
+                }).fail(function (err) {
+                    console.log(err.responseJSON.message);
+                    info.html(template('tplInfo', err.responseJSON));
+                });
+            }
+        })
+
+    </script>
+    <span style="color: #0aa;">高霸王</span>
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+{{extend './common/layout.art'}}
+
+{{block 'main'}}
+    <!-- 头部 -->
+    {{include './common/header.art'}}
+    <!-- /头部 -->
+    <!-- 主体内容 -->
+    <div class="content">
+        <!-- 侧边栏 -->
+        {{include './common/aside.art'}}
+        <!-- /侧边栏 -->
+        <div class="main">
+            <!-- 分类标题 -->
+            <div class="title">
+                <h4>{{article && '_id: ' + article._id}}</h4>
+                {{@message ? '<p class="tips">错误信息: ' + message + '</p>' : ''}}
+            </div>
+            <!-- /分类标题 -->
+            <form class="form-container" action={{link}} method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label>标题</label>
+                    <input name="title" type="text" class="form-control" placeholder="请输入文章标题" value={{article && article.title}}>
+                </div>
+                <div class="form-group">
+                    <label>作者</label>
+                    <input type="text" class="form-control" readonly value="{{@userInfo.username + '-' + userInfo._id}}">
+                    <input name="author" type="hidden" value="{{@userInfo._id}}">
+
+                </div>
+                <!--<div class="form-group">
+                    <label>发布时间</label>
+                    <input name="publishDate" type="date" class="form-control">
+                </div>-->
+
+                <div class="form-group">
+                    <label for="exampleInputFile">文章封面</label>
+                    <input id="file" name="cover" type="file">
+                    <div class="thumbnail-waper">
+                        <img id="preview" class="img-thumbnail" style="width:30%;object-fit:cover;" src={{article && article.cover}}>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>内容</label>
+                    <textarea name="content" class="form-control" id="editor">{{article && article.content}}</textarea>
+                </div>
+                <div class="buttons">
+                    <input type="submit" class="btn btn-primary" value={{button}}>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <!-- /主体内容 -->
+
+{{/block}}
+{{block 'script'}}
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/18.0.0/classic/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/18.0.0/classic/translations/zh-cn.js"></script>
+    <style> 
+    </style>
+    <script>
+        var editor;
+        ClassicEditor
+            .create(document.querySelector('#editor'),{
+                language:'zh-cn'
+            } )
+            .then(newEditor => {   
+                editor = newEditor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        
+        var file = $('#file')[0];
+        var preview = $('#preview')[0];
+        file.onchange = function(){
+            var reader = new FileReader();
+            reader.readAsDataURL(this.files[0]);
+            reader.onload = function(){
+                preview.src = reader.result
+            };
+        }
+        // 获取数据
+        // const editorData = editor.getData();
+    </script>
+{{/block}}

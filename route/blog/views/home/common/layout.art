@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+		<link rel="stylesheet" href="/blog/home/css/base.css">
+		{{block 'link'}}
+		{{/block}}
+	</head>
+
+	<body>
+
+		{{block 'main'}}
+		{{/block}}
+		{{block 'script'}}
+		{{/block}}
+	</body>
+
+</html>

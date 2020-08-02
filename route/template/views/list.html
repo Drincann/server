@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>学员信息</title>
+    <link rel="stylesheet" href="./public/css/list.css">
+</head>
+
+<body>
+    <a href="/template/add" class="add">添加成员信息</a>
+    <table>
+        <caption>学员信息</caption>
+        <tr>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>性别</th>
+            <th>邮箱地址</th>
+            <th>爱好</th>
+            <th>所属学院</th>
+            <th>入学时间</th>
+        </tr>
+
+        {{each students}}
+        <tr>
+            <th>{{$value.name}}</th>
+            <th>{{$value.age}}</th>
+            <th>{{$value.sex}}</th>
+            <th>{{$value.email}}</th>
+            <th>
+                {{each $value.hobbies}} {{$value}} {{/each}}
+            </th>
+            <th>{{$value.collage}}</th>
+            <th>{{dateFormat($value.enterDate,'yyyy年mm月dd日')}}</th>
+        </tr>
+        {{/each}}
+    </table>
+</body>
+
+</html>
