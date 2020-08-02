@@ -152,7 +152,7 @@
             if (renderAll) {
                 $('#stuList').children().stop().slideDown();
             } else {
-                $('#stuList').children().filter((i, ele) => $(ele).hasClass('list-group-item-success')).stop().fadeOut();
+                $('#stuList').children().stop().slideDown().filter((i, ele) => $(ele).hasClass('list-group-item-success')).stop().fadeOut();
             }
         }
 
@@ -184,7 +184,7 @@
                     $('#filter').removeAttr('disabled');
 
                     delInfo();
-                    filter($(this).html() == '只看未签到'); // 调用过滤逻辑
+                    filter($('#filter').html() == '只看未签到'); // 调用过滤逻辑
                 })
                 .catch((xhr) => {
                     // 恢复按钮禁用
