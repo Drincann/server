@@ -22,6 +22,9 @@ $.ajax({
             title: '知乎',
             link: 'https://www.zhihu.com/people/gao-jun-kang'
         }, {
+            title: 'GitHub',
+            link: 'https://github.com/GAOSILIHAI'
+        }, {
             title: 'CSDN',
             link: 'https://blog.csdn.net/qq_16181837'
         }]

@@ -5,4 +5,4 @@ const path = require('path');
 router.use(express.static(path.join(__dirname, 'public')));
 require('./route')(router);
 
-module.exprots = router;
+module.exports = router;
