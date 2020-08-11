@@ -2,8 +2,39 @@ $.ajax({
     type: 'post',
     url: './getSidebar'
 }).done(function (sidebar) {
-    console.log(sidebar);
-    options = {
+    // console.log(sidebar);
+    let searchPlugin = {
+        name: 'searchPlugin',
+        extend: (api) => {
+            api.enableSearch({
+                handler: key => {
+                    if (!(key.trim())) {
+                        return [];
+                    }
+                    return new Promise((resolve, reject) => {
+                        $.ajax({
+                            type: 'get',
+                            url: './search',
+                            data: {
+                                key
+                            },
+                            success(data) {
+                                resolve(data);
+                            },
+                            error(xhr) {
+                                reject('请求 search 路由出错：');
+                                console.error('请求 search 路由出错：');
+                                console.error(xhr);
+                            }
+                        })
+                    });
+                }
+            });
+        }
+    }
+
+
+    let options = {
         tocVisibleDepth: 4,
         disableSidebarToggle: true,
         sidebar,
@@ -27,8 +58,14 @@ $.ajax({
         }, {
             title: 'CSDN',
             link: 'https://blog.csdn.net/qq_16181837'
-        }]
+        }],
+        plugins: [
+            searchPlugin
+        ]
     };
+
+
+
     new Docute(options);
 });
 

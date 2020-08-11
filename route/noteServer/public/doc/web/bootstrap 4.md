@@ -5,7 +5,7 @@
 分别是 属性、响应断点、属性值，其中“响应断点”一般可省
 
 ---
-#### .col （等宽布局）
+## .col （等宽布局）
 
 - 应用到所有设备（breakpoint）
 - 行内自动适应宽度，总会占满一行
@@ -23,7 +23,7 @@
 </div>
 ```
 ---
-#### .col-{size}
+## .col-{size}
 - 设置列的固定栅格数量
 - 栅格数量不足时不会占满一行
 
@@ -34,7 +34,7 @@
 </div>
 ```
 ---
-#### .col-{breakpoint}
+## .col-{breakpoint}
 - 通过 {breakpoint}(断点) 来设置盒子在某个断点及以上时的适应性（否则栅格数量会被调整为 12）
 
 例：
@@ -47,7 +47,7 @@
 </div>
 ```
 ---
-#### .col-auto
+## .col-auto
 - 根据内容自动调整 {size}
 - 栅格数量不足时不会占满一行
 
@@ -66,7 +66,7 @@ right 固定宽度， middle 根据内容适应宽度， left 根据 middle 自�
 
 ---
 
-#### 混合布局
+## 混合布局
 
 - 更精准的类名描述会在特定情况下覆盖掉范围较广的类名
 
@@ -84,7 +84,7 @@ right 固定宽度， middle 根据内容适应宽度， left 根据 middle 自�
 
 ---
 
-#### 定义行的可容纳内容数量 .row-cols-{count}
+## 定义行的可容纳内容数量 .row-cols-{count}
 
 - {count} 内容数量
 - 不论 col-1 还是 col-12 ，均计为一块内容
@@ -103,7 +103,7 @@ right 固定宽度， middle 根据内容适应宽度， left 根据 middle 自�
 
 ---
 
-#### 整体控制 .row 的子元素的垂直位置 .align-items-{position}
+## 整体控制 .row 的子元素的垂直位置 .align-items-{position}
 
 - {position} 包含 ==start== 、==center== 和 ==end==
 - 分别表示“垂直靠上”、“垂直居中”和“垂直靠下”
@@ -150,7 +150,7 @@ right 固定宽度， middle 根据内容适应宽度， left 根据 middle 自�
 
 ---
 
-#### 单独控制 .row 的子元素的垂直位置 .align-self-{position}
+## 单独控制 .row 的子元素的垂直位置 .align-self-{position}
 
 - {positon} 包含 ==start== 、==center== 和 ==end==
 - 分别表示“垂直靠上”、“垂直居中”和“垂直靠下”
@@ -175,7 +175,7 @@ right 固定宽度， middle 根据内容适应宽度， left 根据 middle 自�
 
 ---
 
-#### 整体控制 .row 的子元素的水平位置 .justify-content-{position}
+## 整体控制 .row 的子元素的水平位置 .justify-content-{position}
 
 - {positon} 包含 ==start== 、==center== 、 ==end==、==around==、==between==
 - 分别表示“垂直靠上”、“垂直居中”、“垂直靠下”、“等距对齐”、”两端对齐“
@@ -233,7 +233,7 @@ right 固定宽度， middle 根据内容适应宽度， left 根据 middle 自�
 
 ---
 
-####  消除边距 .no-gutters
+##  消除边距 .no-gutters
 
 `.container > .row` 下的列元素默认存在一个 `padding:0 15px;`(左右15px)
 
@@ -303,7 +303,7 @@ right 固定宽度， middle 根据内容适应宽度， left 根据 middle 自�
 ```
 
 ---
-#### 换行 
+## 换行 
 
 - 使用 ==.w-100== ，意为 width:100%;
 
@@ -345,7 +345,7 @@ d 是 display 的缩写
 
 ---
 
-#### 排序 .order-{index}
+## 排序 .order-{index}
 
 - {index} 取值为 1 ~ 12，数越小代表位置越靠前（左）
 - 没有添加该类的元素位置不变
@@ -367,7 +367,7 @@ d 是 display 的缩写
 
 ---
 
-#### 列偏移 .offset-{count}
+## 列偏移 .offset-{count}
 
 - 经测试，{count} 取值为 1 ~ 11
 
@@ -384,7 +384,7 @@ d 是 display 的缩写
 
 ---
 
-#### margin 偏移  .mr-auto / .ml-auto
+## margin 偏移  .mr-auto / .ml-auto
 
 - mr -> margin right | ml -> margin left
 
@@ -417,7 +417,7 @@ d 是 display 的缩写
 
 ---
 
-#### 列嵌套
+## 列嵌套
 
 例如：
 
