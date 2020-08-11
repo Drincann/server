@@ -16,6 +16,12 @@ function getDir(dir, result) {
     return result;
 }
 
+// 正则处理
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
+
+
 // 匹配 key，返回预定的接口
 // interface SearchResult {
 //     title: string
@@ -27,7 +33,8 @@ module.exports = async function match(key) {
     // 调 getDir 拿到文件列表
     let fileList = getDir('route/noteServer/public/doc', []);
     // 正则
-    let regexp = new RegExp(`.{0,}${key}.{0,}`, 'i');
+
+    let regexp = new RegExp(`.{0,}${escapeRegex(key)}.{0,}`, 'i');
     // 储存返回的结果
     let result = []
 
