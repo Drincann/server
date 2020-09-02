@@ -1,4 +1,4 @@
-<style>
+﻿<style>
     del {
         background-color: #000;
     }
@@ -46,7 +46,7 @@
 
 |                                                   |
 | ------------------------------------------------- |
-| [主站](https://www.zhihu.com/people/gao-jun-kang) |
+| [主站](https://gaolihai.top) |
 | [知乎](https://www.zhihu.com/people/gao-jun-kang) |
 | [GitHub](https://github.com/GAOSILIHAI)           |
 | [CSDN](https://www.zhihu.com/people/gao-jun-kang) |
