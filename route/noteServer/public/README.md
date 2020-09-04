@@ -49,7 +49,7 @@
 | [主站](https://gaolihai.top) |
 | [知乎](https://www.zhihu.com/people/gao-jun-kang) |
 | [GitHub](https://github.com/GAOSILIHAI)           |
-| [CSDN](https://www.zhihu.com/people/gao-jun-kang) |
+| [CSDN](https://blog.csdn.net/qq_16181837) |
 
 <br/>
 
