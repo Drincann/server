@@ -14,11 +14,11 @@
 
 最近在学的：
 
-`Java`黑马 JAVASE;
+`Java` Java 核心技术 卷 I;
 
 
 
-`Git`[廖雪峰的 Git 教程](https://www.liaoxuefeng.com/wiki/896043488029600)
+`Git`[廖雪峰的 Git 教程](https://www.liaoxuefeng.com/wiki/896043488029600)（已结束）;
 
 
 
