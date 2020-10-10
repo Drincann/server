@@ -1,8 +1,9 @@
 $.ajax({
+    // 请求笔记列表
     type: 'post',
     url: './getSidebar'
 }).done(function (sidebar) {
-    // console.log(sidebar);
+    // 搜索 api，注册回调
     let searchPlugin = {
         name: 'searchPlugin',
         extend: (api) => {
@@ -13,6 +14,7 @@ $.ajax({
                     }
                     return new Promise((resolve, reject) => {
                         $.ajax({
+                            // 请求搜索接口
                             type: 'get',
                             url: './search',
                             data: {
@@ -32,7 +34,21 @@ $.ajax({
             });
         }
     }
-
+    // 页面刷新 api，用来刷新 valine
+    let refreshValine = {
+        name: 'refreshValine',
+        extend(api) {
+            console.log(location.href);
+            api.onContentUpdated(() => {
+                new Valine({
+                    el: '#vcomments',
+                    appId: 'ik2aTAKBgdcRDvpwj25iFfk4-gzGzoHsz',
+                    appKey: 'gz4c5n4iXKA08zMuXWD7AnnY',
+                    path: window.location.href
+                });
+            });
+        },
+    }
 
     let options = {
         tocVisibleDepth: 4,
@@ -60,12 +76,17 @@ $.ajax({
             link: 'https://blog.csdn.net/qq_16181837'
         }],
         plugins: [
-            searchPlugin
-        ]
+            searchPlugin,
+            refreshValine
+        ],
     };
 
 
-
+    // Docute init
     new Docute(options);
+    // 提供 valine 的容器
+    $('#content .Content').append(`
+    <div id="vcomments"></div>
+    `);
 });
 
