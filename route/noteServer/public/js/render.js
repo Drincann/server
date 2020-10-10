@@ -89,11 +89,10 @@ $.ajax({
     // 提供 valine 的容器
     $('#content .Content').append(`
     <hr>
-    <div id="" class="leancloud_visitors" style="padding: 5px 0; margin: 15px 0;text-align: center; background:rgba(0, 170, 170, .05); border-radius: 5px;">
-        这是第
-        <i class="leancloud-visitors-count">loading...</i>
-        次有人阅读这篇文章，
-        可是高厉害仍然非常地不开心！
+    <div id="" class="leancloud_visitors" style="padding: 5px 10px; margin: 15px 0;text-align: center; background:rgba(0, 150, 136, .05); border-radius: 5px;">
+        文章被点了
+        <i class="leancloud-visitors-count" style="color: #009688;">loading...</i>
+        次，高厉害却一点都也不开心
     </div>
     <div id="vcomments"></div>
     `);
