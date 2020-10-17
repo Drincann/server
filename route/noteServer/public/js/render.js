@@ -3,7 +3,7 @@ $.ajax({
     type: 'post',
     url: './getSidebar'
 }).done(function (sidebar) {
-    // 搜索 api，注册回调
+    // plugin: 搜索 api，注册回调
     let searchPlugin = {
         name: 'searchPlugin',
         extend: (api) => {
@@ -34,11 +34,12 @@ $.ajax({
             });
         }
     }
-    // 页面刷新 api，用来刷新 valine
+    // plugin: 页面刷新 api，用来刷新 valine 及渲染 mermaid
     let refreshValine = {
         name: 'refreshValine',
         extend(api) {
             api.onContentUpdated(() => {
+                // 刷新 valine
                 $(document).find('.leancloud_visitors').prop('id', location.href);
                 new Valine({
                     el: '#vcomments',
@@ -48,9 +49,31 @@ $.ajax({
                     placeholder: '高厉害最近很不开心！',
                     visitor: true
                 });
+
+                // parse mermaid
+                mermaid.init(undefined, '.mermaid');
             });
         },
     }
+
+    // plugin: Marked 渲染器，用于替换 mermaid 标签的类名
+    let onParseCode = {
+        name: 'onParseCode',
+        extend(api) {
+            api.extendMarkedRenderer((render) => {
+                let oldProcess = render.code.bind(render);
+                render.code = function (code, language, n, i) {
+                    if (code.match(/^sequenceDiagram/) || code.match(/^graph/)) {
+                        // var graph = mermaid.mermaidAPI.render('graphDiv', code);
+                        return '<div class="mermaid" >' + code + '</div>';
+                    } else {
+                        return oldProcess(code, language, n, i);
+                    }
+                };
+            })
+        }
+    }
+
 
     let options = {
         tocVisibleDepth: 4,
@@ -79,7 +102,8 @@ $.ajax({
         }],
         plugins: [
             searchPlugin,
-            refreshValine
+            refreshValine,
+            onParseCode,
         ],
     };
 
@@ -96,5 +120,11 @@ $.ajax({
     </div>
     <div id="vcomments"></div>
     `);
+
+    // 由于 docute onContentUpdated 接口回调功能存在 bug，无法有效刷新渲染，这里两秒自动渲染一次
+    setInterval(() => {
+        // parse mermaid
+        mermaid.init(undefined, '.mermaid');
+    }, 2000);
 });
 
