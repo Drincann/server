@@ -5,8 +5,8 @@ const http = require('http');
 const fs = require('fs');
 // server
 const options = {
-    key: fs.readFileSync(path.join(__dirname, 'https', '2_gaolihai.top.key')),
-    cert: fs.readFileSync(path.join(__dirname, 'https', '1_gaolihai.top_bundle.crt'))
+    key: fs.readFileSync(path.join(__dirname, 'https', 'server.key')),
+    cert: fs.readFileSync(path.join(__dirname, 'https', 'server.crt'))
 };
 const app = express();
 const httpServer = http.createServer(app);
@@ -21,7 +21,7 @@ const router = {
     todo: require('./route/todo/app'),
     ali: require('./route/alibaixiu/app'),
     faceWrap: require('./route/faceWrap/app'),
-    query: require('./route/query/app'),
+    // query: require('./route/query/app'), // 接口失效
     noteServer: require('./route/noteServer/app'),
     checkIn: require('./route/checkIn/app'),
 };
