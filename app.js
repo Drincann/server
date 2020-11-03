@@ -39,7 +39,7 @@ app.use('/blog', router.blog);
 app.use('/todo', router.todo);
 app.use('/ali', router.ali);
 app.use('/faceWrap', router.faceWrap);
-app.use('/query', router.query);
+// app.use('/query', router.query); // 接口失效
 app.use('/note', router.noteServer);
 app.use('/checkIn', router.checkIn);
 // 404
