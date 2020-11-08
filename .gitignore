@@ -2,3 +2,4 @@ node_modules/*
 .vs/*
 .vscode/*
 route/noteServer/public/doc/*
+route/submit/public/uploads/*
