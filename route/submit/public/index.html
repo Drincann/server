@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>upload</title>
+    <link rel="stylesheet" href="./assert/bootstrap/bootstrap.css">
+</head>
+
+<body>
+    <div class="container">
+        <div id="infoBox"></div>
+        <div class="row mt-5">
+            <div class="input-group col-auto">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">姓名</span>
+                </div>
+                <input type="text" id="name" placeholder="click here to input" class="form-control" aria-label="Default">
+            </div>
+
+        </div>
+
+        <div class="row mt-3">
+
+            <div class="input-group col-auto">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">选择图片</span>
+                </div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="upload">
+                    <label class="custom-file-label" id="uploadLabel" for="upload">click here to choose file</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-5">
+            <button type="button" class="btn btn-success col-auto" id="submit">提交</button>
+        </div>
+    </div>
+
+
+    <script type="text/html" id="infoTpl">
+        <div class="alert {{@classText}} col text-center" role="alert" id="info" style="display: none;">
+            {{infoText}}
+        </div>
+    </script>
+
+    <script src="./assert/jquery/jquery.js"></script>
+    <script src="./assert/popper/popper.js"></script>
+    <script src="./assert/bootstrap/bootstrap.js"></script>
+    <script src="./assert/artTemplate/template.js"></script>
+    <script src="./js/index.js"></script>
+</body>
+
+</html>

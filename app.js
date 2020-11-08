@@ -24,6 +24,7 @@ const router = {
     // query: require('./route/query/app'), // 接口失效
     noteServer: require('./route/noteServer/app'),
     checkIn: require('./route/checkIn/app'),
+    submit: require('./route/submit/app'),
 };
 
 // https 重定向
@@ -42,6 +43,7 @@ app.use('/faceWrap', router.faceWrap);
 // app.use('/query', router.query); // 接口失效
 app.use('/note', router.noteServer);
 app.use('/checkIn', router.checkIn);
+app.use('/submit', router.submit);
 // 404
 app.use(require('./route/notFound'));
 
