@@ -37,14 +37,30 @@ router.post('/upload', (req, res) => {
         fs.rename(file.path, newName, function(e) {
             if (e) {
                 fs.unlinkSync(file.path);
-                return res.status(500).send({ message: '后端错误，文件重命名失败！' });
+                return res.status(500).send({ message: '服务端错误：文件重命名失败！' });
             } else {
                 return res.send({ message: '上传成功' });
             }
         });
     } catch (error) {
-        return res.status(500).send({ message: error.message });
+        return res.status(500).send({ message: '服务端错误：' + error.message });
     }
+});
+
+// 错误处理
+router.use((err, req, res, next) => {
+    try {
+        let now = new Date().getMinutes;
+        console.log(now.getDate() + ' ' + now.getHours() + ':' + now.getMinutes() +
+            ' --> submit 路由触发错误处理：' + err.message);
+        res.status(500).send({ message: '服务端错误：' + err.message });
+    } catch (error) {
+        let now = new Date().getMinutes;
+        console.log(now.getDate() + ' ' + now.getHours() + ':' + now.getMinutes() +
+            ' --> submit 路由触发错误处理：' + err.message);
+        res.status(500).send({ message: '服务端错误：' + error.message });
+    }
+
 });
 
 module.exports = router;
