@@ -38,6 +38,7 @@ $('#submit').click(function(e) {
         contentType: false,
         success: function(data) {
             renderInfo(data.message, 'alert-success');
+            renderCount();
             state = 'done';
         },
         error: errHandler
