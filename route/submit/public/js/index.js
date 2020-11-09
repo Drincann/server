@@ -47,13 +47,19 @@ $('#submit').click(function(e) {
 });
 
 $('#query').on('click', function(e) {
-    var name = $('#name').val();
+    // 验证姓名
+    var name = $('#name').val().trim();
+    if (!(name && name.length <= 4 && name.length >= 2)) return renderInfo('姓名格式不规范', 'alert-danger'), state = 'done';;
+
     var src = './uploads/' + getTodayStr() + name + '.jpg';
     // 加载模态框
-    $('#uploadedImgModal').html(template('uploadedImgModalTpl', { name, src }));
-    $('#uploadedImgModal').modal('show').one('shown.bs.modal', function() {
-
+    isImgExists(src).then(function() {
+        $('#uploadedImgModal').html(template('uploadedImgModalTpl', { name, src }));
+        $('#uploadedImgModal').modal('show');
+    }).catch(function() {
+        renderInfo('该姓名今日尚未上传图片', 'alert-danger');
     });
+
 })
 $('#name').on('change', function(e) {
     $('#thumb').prop('src', );
@@ -94,6 +100,20 @@ function renderCount() {
         error: errHandler
     });
 }
+
+function isImgExists(url) {
+    return new Promise(function(resolve, reject) {
+        var img = new Image();
+        img.src = url;
+        if (img.fileSize > 0 || (img.width > 0 && img.height > 0)) {
+            resolve();
+        } else {
+            reject();
+        }
+    })
+}
+
+
 
 // 显示上传文件名
 $('#upload').on('change', function(e) {
