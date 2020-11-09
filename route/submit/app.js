@@ -2,7 +2,6 @@ const router = require('express').Router();
 const express = require('express')
 const formidable = require('express-formidable');
 const path = require('path');
-const fs = require('fs');
 
 // 开放静态资源
 router.use(express.static(path.join(__dirname, 'public')));
@@ -21,23 +20,7 @@ router.use(formidable({
 router.post('/upload', require('./route/upload'));
 
 // 当日提交
-router.get('/submitCount', (req, res) => {
-    try {
-        let count = 0;
-        let todayStr = require('./tools/getTodayStr')();
-        for (filename of fs.readdirSync(path.join(__dirname, 'public', 'uploads'))) {
-            if (fs.statSync(path.join(__dirname, 'public', 'uploads', filename)).isFile() &&
-                new RegExp(todayStr).test(filename)) {
-                ++count;
-            }
-        }
-        return res.send({ message: '获取成功', count });
-    } catch (error) {
-        return res.status(500).send({ message: '服务端错误：' + error.message });
-    }
-
-
-});
+router.get('/submitCount', require('./route/getCount'));
 
 // 错误处理
 router.use((err, req, res, next) => {

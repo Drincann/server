@@ -16,7 +16,7 @@ module.exports = (req, res) => {
 
         // 重命名
         let today = new Date();
-        let newName = path.join(__dirname, 'public', 'uploads', getTodayStr() + name + '.jpg');
+        let newName = path.join(__dirname, '../', 'public', 'uploads', getTodayStr() + name + '.jpg');
         fs.rename(file.path, newName, function(e) {
             if (e) {
                 fs.unlinkSync(file.path);
