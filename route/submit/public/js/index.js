@@ -56,6 +56,8 @@ $('#query').on('click', function(e) {
     isImgExists(src).then(function() {
         $('#uploadedImgModal').html(template('uploadedImgModalTpl', { name, src }));
         $('#uploadedImgModal').modal('show');
+        renderInfo('查询成功', 'alert-success');
+
     }).catch(function() {
         renderInfo('该姓名今日尚未上传图片', 'alert-danger');
     });
