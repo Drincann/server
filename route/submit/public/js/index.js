@@ -105,11 +105,12 @@ function isImgExists(url) {
     return new Promise(function(resolve, reject) {
         var img = new Image();
         img.src = url;
-        if (img.fileSize > 0 || (img.width > 0 && img.height > 0)) {
+        img.on('load', function() {
             resolve();
-        } else {
+        });
+        img.on('error', function() {
             reject();
-        }
+        });
     })
 }
 
