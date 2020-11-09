@@ -2,7 +2,7 @@ const router = require('express').Router();
 const express = require('express')
 const formidable = require('express-formidable');
 const path = require('path');
-const getTodayStr = require('../tools/getTodayStr');
+const getTodayStr = require('./tools/getTodayStr');
 
 // 开放静态资源
 router.use(express.static(path.join(__dirname, 'public')));
