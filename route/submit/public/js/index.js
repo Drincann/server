@@ -4,6 +4,14 @@ renderCount();
 // 两个状态 done 及 loading，loading 时在 #upload 的 change 回调中禁止访问
 var state = 'done';
 $('#submit').click(function(e) {
+    function showLoading() {
+        $('#query').prepend('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
+    }
+
+    function hideLoading() {
+        $('#query').children().first().remove();
+    }
+
     e.preventDefault();
     // 节流阀
     if (state == 'loading') return state = 'done';
@@ -23,7 +31,7 @@ $('#submit').click(function(e) {
     } else {
         return renderInfo('请选择欲上传的图片', 'alert-danger'), state = 'done';;
     }
-
+    showLoading();
     renderInfo('正在上传...', 'alert-secondary');
     // 设置提交数据
     var formData = new FormData();
@@ -40,26 +48,41 @@ $('#submit').click(function(e) {
             renderInfo(data.message, 'alert-success');
             renderCount();
             state = 'done';
+            hideLoading();
         },
-        error: errHandler
+        error: function() {
+            hideLoading();
+            errHandler();
+        }
     });
 
 });
 
 $('#query').on('click', function(e) {
+    function showLoading() {
+        $('#query').prepend('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
+    }
+
+    function hideLoading() {
+        $('#query').children().first().remove();
+    }
+    // 加载条
     // 验证姓名
     var name = $('#name').val().trim();
     if (!(name && name.length <= 4 && name.length >= 2)) return renderInfo('姓名格式不规范', 'alert-danger'), state = 'done';;
-
+    showLoading();
     var src = './uploads/' + getTodayStr() + name + '.jpg';
+
     // 加载模态框
     isImgExists(src).then(function() {
         $('#uploadedImgModal').html(template('uploadedImgModalTpl', { name, src }));
         $('#uploadedImgModal').modal('show');
         renderInfo('查询成功', 'alert-success');
+        hideLoading();
 
     }).catch(function() {
         renderInfo('该姓名今日尚未上传图片', 'alert-danger');
+        hideLoading();
     });
 
 })
