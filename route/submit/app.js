@@ -2,6 +2,7 @@ const router = require('express').Router();
 const express = require('express')
 const formidable = require('express-formidable');
 const path = require('path');
+const getTodayStr = require('../tools/getTodayStr');
 
 // 开放静态资源
 router.use(express.static(path.join(__dirname, 'public')));
@@ -25,14 +26,12 @@ router.get('/submitCount', require('./route/getCount'));
 // 错误处理
 router.use((err, req, res, next) => {
     try {
-        let now = new Date().getMinutes;
-        console.log(now.getDate() + ' ' + now.getHours() + ':' + now.getMinutes() +
-            ' --> submit 路由触发错误处理：' + err.message);
+        console.log(getTodayStr() + '> 在 submit 路由触发错误处理', err);
         res.status(500).send({ message: '服务端错误：' + err.message });
     } catch (error) {
         let now = new Date().getMinutes;
-        console.log(now.getDate() + ' ' + now.getHours() + ':' + now.getMinutes() +
-            ' --> submit 路由触发错误处理：' + err.message);
+        console.log(getTodayStr() + '> 在错误处理中触发了异常', error);
+        console.log(getTodayStr() + '> 在 submit 路由触发错误处理', err);
         res.status(500).send({ message: '服务端错误：' + error.message });
     }
 

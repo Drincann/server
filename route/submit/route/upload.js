@@ -26,6 +26,7 @@ module.exports = (req, res) => {
             }
         });
     } catch (error) {
+        console.log(getTodayStr() + '> 在 upload 路由触发了异常', error);
         return res.status(500).send({ message: '服务端错误：' + error.message });
     }
 };

@@ -1,5 +1,7 @@
 const path = require('path');
 const fs = require('fs');
+const getTodayStr = require('../tools/getTodayStr');
+
 module.exports = (req, res) => {
     try {
         let count = 0;
@@ -12,6 +14,7 @@ module.exports = (req, res) => {
         }
         return res.send({ message: '获取成功', count });
     } catch (error) {
+        console.log(getTodayStr() + '> 在 submitCount 路由触发了异常', error);
         return res.status(500).send({ message: '服务端错误：' + error.message });
     }
 
