@@ -10,6 +10,27 @@
 </head>
 
 <body>
+    <div class="modal fade" id="uploadedImgModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    </div>
+    <script type="text/html" id="uploadedImgModalTpl">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5>{{name}}</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <img class="thumb" src={{src}} alt="">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </script>
+
     <div class="jumbotron jumbotron-fluid mb-0">
         <div class="container mt-4">
             <h2> 提交截图 <span class="badge badge-pill badge-dark">Beta version</span></h2>
@@ -20,19 +41,23 @@
 
         </div>
     </div>
+
     <div id="infoBox"></div>
+    <script type="text/html" id="infoTpl">
+        <div class="alert {{@classText}} col text-center" role="alert" id="info" style="display: none;">
+            {{infoText}}
+        </div>
+    </script>
 
     <div class="container">
 
         <div class="row mt-5">
-
             <div class="input-group col-auto">
                 <div class="input-group-prepend">
                     <span class="input-group-text">姓名</span>
                 </div>
                 <input type="text" id="name" placeholder="click here to input" class="form-control" aria-label="Default">
             </div>
-
         </div>
 
         <div class="row mt-5">
@@ -49,29 +74,22 @@
         </div>
 
 
-        <div id="countBox" class="row justify-content-center mt-5">
-
-        </div>
+        <div id="countBox" class="row justify-content-center mt-5"></div>
+        <script type="text/html" id="countTpl">
+            <div class="col-auto">今日提交: {{count}}</div>
+        </script>
 
         <div class="row justify-content-center mt-3">
             <button type="button" class="btn btn-success col-auto" id="submit">提交</button>
+            <button type="button" class="btn btn-warning col-auto ml-2" id="query">查看截图</button>
         </div>
-
 
         <p class="text-center pt-5">Powered by <a href="https://gaolihai.top/note" target="blank">@高厉害</a></p>
 
     </div>
 
-    <script type="text/html" id="countTpl">
 
-        <div class="col-auto">今日提交: {{count}}</div>
 
-    </script>
-    <script type="text/html" id="infoTpl">
-        <div class="alert {{@classText}} col text-center" role="alert" id="info" style="display: none;">
-            {{infoText}}
-        </div>
-    </script>
 
     <script src="./assert/jquery/jquery.js"></script>
     <script src="./assert/popper/popper.js"></script>

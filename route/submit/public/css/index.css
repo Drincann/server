@@ -1,3 +1,7 @@
 #uploadLabel {
     overflow: hidden;
 }
+
+.thumb {
+    max-width: 100%;
+}

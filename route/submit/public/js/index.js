@@ -46,6 +46,26 @@ $('#submit').click(function(e) {
 
 });
 
+$('#query').on('click', function(e) {
+    var name = $('#name').val();
+    var src = './uploads/' + getTodayStr() + name + '.jpg';
+    // 加载模态框
+    $('#uploadedImgModal').html(template('uploadedImgModalTpl', { name, src }));
+    $('#uploadedImgModal').modal('show').one('shown.bs.modal', function() {
+
+    });
+})
+$('#name').on('change', function(e) {
+    $('#thumb').prop('src', );
+});
+
+function getTodayStr() {
+    function getDouble(num) {
+        return num <= 9 ? '0' + num : num;
+    }
+    var today = new Date;
+    return '' + today.getFullYear() + getDouble(today.getMonth() + 1) + getDouble(today.getDate());
+}
 
 function renderInfo(infoText, classText) {
     $('#infoBox').html(template('infoTpl', { infoText, classText }));
