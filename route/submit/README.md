@@ -19,7 +19,35 @@
 | name       | required | 姓名，用于生成文件名 |
 | screenshot | required | 图片数据             |
 
+返回
 
+```json
+{
+    "message": "..."
+}
+```
+
+
+
+#### 获取提交数量
+
+| url                 | method |
+| ------------------- | ------ |
+| /submit/submitCount | POST   |
+
+| fields | default | 参数说明 |
+| ------ | ------- | -------- |
+| 无     |         |          |
+
+
+返回
+
+```json
+{
+    "message": "...",
+    "count": 3
+}
+```
 
 
 

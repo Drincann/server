@@ -21,10 +21,10 @@
         </div>
     </div>
     <div id="infoBox"></div>
-    <div class="container  mt-4 pt-5">
 
+    <div class="container">
 
-        <div class="row">
+        <div class="row mt-5">
 
             <div class="input-group col-auto">
                 <div class="input-group-prepend">
@@ -48,7 +48,12 @@
             </div>
         </div>
 
-        <div class="row justify-content-center mt-5">
+
+        <div id="countBox" class="row justify-content-center mt-5">
+
+        </div>
+
+        <div class="row justify-content-center mt-3">
             <button type="button" class="btn btn-success col-auto" id="submit">提交</button>
         </div>
 
@@ -57,7 +62,11 @@
 
     </div>
 
+    <script type="text/html" id="countTpl">
 
+        <div class="col-auto">今日提交: {{count}}</div>
+
+    </script>
     <script type="text/html" id="infoTpl">
         <div class="alert {{@classText}} col text-center" role="alert" id="info" style="display: none;">
             {{infoText}}

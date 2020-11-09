@@ -18,33 +18,25 @@ router.use(formidable({
 }, [{ event: 'error', action: () => void(0) }]));
 
 // 上传图片路由
-router.post('/upload', (req, res) => {
+router.post('/upload', require('./route/upload'));
+
+// 当日提交
+router.get('/submitCount', (req, res) => {
     try {
-        // 验证参数 name
-        let { name } = req.fields;
-        if (!(name && name.length <= 4 && name.length >= 2)) res.status(400).send({ message: '缺少参数 name' });
-
-        // 验证图片及其大小
-        let file = req.files['screenshot'] ? req.files['screenshot'] : undefined;
-        if (!(file && file.size != 0)) {
-            return res.status(400).send({ message: '图片无效' });
-        }
-
-        // 重命名
-        let today = new Date();
-        let newName = path.join(__dirname, 'public', 'uploads',
-            '' + today.getFullYear() + today.getMonth() + (today.getDate() < 10 ? '0' + today.getDate() : today.getDate()) + name + '.jpg');
-        fs.rename(file.path, newName, function(e) {
-            if (e) {
-                fs.unlinkSync(file.path);
-                return res.status(500).send({ message: '服务端错误：文件重命名失败！' });
-            } else {
-                return res.send({ message: '上传成功' });
+        let count = 0;
+        let todayStr = require('./tools/getTodayStr')();
+        for (filename of fs.readdirSync(path.join(__dirname, 'public', 'uploads'))) {
+            if (fs.statSync(path.join(__dirname, 'public', 'uploads', filename)).isFile() &&
+                new RegExp(todayStr).test(filename)) {
+                ++count;
             }
-        });
+        }
+        return res.send({ message: '获取成功', count });
     } catch (error) {
         return res.status(500).send({ message: '服务端错误：' + error.message });
     }
+
+
 });
 
 // 错误处理

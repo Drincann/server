@@ -1,5 +1,5 @@
-setInfo('请输入姓名并选择文件', 'alert-secondary');
-
+renderInfo('请输入姓名并选择文件', 'alert-secondary');
+renderCount();
 // 节流阀
 // 两个状态 done 及 loading，loading 时在 #upload 的 change 回调中禁止访问
 var state = 'done';
@@ -12,24 +12,24 @@ $('#submit').click(function(e) {
 
     // 验证姓名
     var name = $('#name').val().trim();
-    if (!(name && name.length <= 4 && name.length >= 2)) return setInfo('姓名格式不规范', 'alert-danger'), state = 'done';;
+    if (!(name && name.length <= 4 && name.length >= 2)) return renderInfo('姓名格式不规范', 'alert-danger'), state = 'done';;
 
     // 验证图片
     var screenshot = $('#upload')[0].files[0];
     if (screenshot) {
         if (screenshot.size > 1024 * 1024 * 5) {
-            return setInfo('图片大小不能超过 5 MB', 'alert-danger'), state = 'done';;
+            return renderInfo('图片大小不能超过 5 MB', 'alert-danger'), state = 'done';;
         }
     } else {
-        return setInfo('请选择欲上传的图片', 'alert-danger'), state = 'done';;
+        return renderInfo('请选择欲上传的图片', 'alert-danger'), state = 'done';;
     }
 
-    setInfo('正在上传...', 'alert-secondary');
+    renderInfo('正在上传...', 'alert-secondary');
     // 设置提交数据
     var formData = new FormData();
     formData.append('screenshot', screenshot);
     formData.append('name', name)
-    setInfo('请耐心等待，正在上传...', 'alert-info');
+    renderInfo('请耐心等待，正在上传...', 'alert-info');
     $.ajax({
         type: 'post',
         url: 'upload',
@@ -37,7 +37,7 @@ $('#submit').click(function(e) {
         processData: false,
         contentType: false,
         success: function(data) {
-            setInfo(data.message, 'alert-success');
+            renderInfo(data.message, 'alert-success');
             state = 'done';
         },
         error: errHandler
@@ -46,7 +46,7 @@ $('#submit').click(function(e) {
 });
 
 
-function setInfo(infoText, classText) {
+function renderInfo(infoText, classText) {
     $('#infoBox').html(template('infoTpl', { infoText, classText }));
     $('#info').fadeIn();
 }
@@ -61,6 +61,17 @@ function errHandler(err) {
     }
     $('#info').fadeIn();
     state = 'done';
+}
+
+function renderCount() {
+    $.ajax({
+        type: 'get',
+        url: 'submitCount',
+        success: function(data) {
+            $('#countBox').html(template('countTpl', { count: data.count }));
+        },
+        error: errHandler
+    });
 }
 
 // 显示上传文件名
