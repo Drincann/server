@@ -105,10 +105,10 @@ function isImgExists(url) {
     return new Promise(function(resolve, reject) {
         var img = new Image();
         img.src = url;
-        img.on('load', function() {
+        $(img).on('load', function() {
             resolve();
         });
-        img.on('error', function() {
+        $(img).on('error', function() {
             reject();
         });
     })
