@@ -9,7 +9,7 @@ $('#submit').click(function(e) {
     }
 
     function hideLoading() {
-        $('#query').children().first().remove();
+        $('#submit').children().first().remove();
     }
 
     e.preventDefault();
