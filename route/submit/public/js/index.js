@@ -5,7 +5,7 @@ renderCount();
 var state = 'done';
 $('#submit').click(function(e) {
     function showLoading() {
-        $('#query').prepend('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
+        $('#submit').prepend('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
     }
 
     function hideLoading() {
