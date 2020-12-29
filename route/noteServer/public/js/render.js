@@ -89,7 +89,7 @@ $.ajax({
             link: '/'
         }, {
             title: '主站',
-            link: '../'
+            link: 'https://gaolihai.cool/note'
         }, {
             title: '知乎',
             link: 'https://www.zhihu.com/people/gao-jun-kang'
