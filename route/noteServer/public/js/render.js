@@ -2,39 +2,39 @@ $.ajax({
     // 请求笔记列表
     type: 'post',
     url: './getSidebar'
-}).done(function (sidebar) {
+}).done(function(sidebar) {
     // plugin: 搜索 api，注册回调
     let searchPlugin = {
-        name: 'searchPlugin',
-        extend: (api) => {
-            api.enableSearch({
-                handler: key => {
-                    if (!(key.trim())) {
-                        return [];
+            name: 'searchPlugin',
+            extend: (api) => {
+                api.enableSearch({
+                    handler: key => {
+                        if (!(key.trim())) {
+                            return [];
+                        }
+                        return new Promise((resolve, reject) => {
+                            $.ajax({
+                                // 请求搜索接口
+                                type: 'get',
+                                url: './search',
+                                data: {
+                                    key
+                                },
+                                success(data) {
+                                    resolve(data);
+                                },
+                                error(xhr) {
+                                    reject('请求 search 路由出错：');
+                                    console.error('请求 search 路由出错：');
+                                    console.error(xhr);
+                                }
+                            })
+                        });
                     }
-                    return new Promise((resolve, reject) => {
-                        $.ajax({
-                            // 请求搜索接口
-                            type: 'get',
-                            url: './search',
-                            data: {
-                                key
-                            },
-                            success(data) {
-                                resolve(data);
-                            },
-                            error(xhr) {
-                                reject('请求 search 路由出错：');
-                                console.error('请求 search 路由出错：');
-                                console.error(xhr);
-                            }
-                        })
-                    });
-                }
-            });
+                });
+            }
         }
-    }
-    // plugin: 页面刷新 api，用来刷新 valine 及渲染 mermaid
+        // plugin: 页面刷新 api，用来刷新 valine 及渲染 mermaid
     let refreshValine = {
         name: 'refreshValine',
         extend(api) {
@@ -62,7 +62,7 @@ $.ajax({
         extend(api) {
             api.extendMarkedRenderer((render) => {
                 let oldProcess = render.code.bind(render);
-                render.code = function (code, language, n, i) {
+                render.code = function(code, language, n, i) {
                     if (code.match(/^sequenceDiagram/) || code.match(/^graph/)) {
                         // var graph = mermaid.mermaidAPI.render('graphDiv', code);
                         return '<div class="mermaid" >' + code + '</div>';
@@ -89,7 +89,7 @@ $.ajax({
             link: '/'
         }, {
             title: '主站',
-            link: 'https://gaolihai.top'
+            link: '/'
         }, {
             title: '知乎',
             link: 'https://www.zhihu.com/people/gao-jun-kang'
@@ -127,4 +127,3 @@ $.ajax({
         mermaid.init(undefined, '.mermaid');
     }, 2000);
 });
-

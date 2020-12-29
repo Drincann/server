@@ -1,5 +1,5 @@
 // 获取模板列表
-$.get('/faceWrap/tplList').done(function (data) {
+$.get('/faceWrap/tplList').done(function(data) {
     $('#faceList').html(template('faceListTpl', data.templateArr));
     $('#faceList').children().eq(0).trigger('click');
 }).fail(errHandler)
@@ -8,34 +8,34 @@ $.get('/faceWrap/tplList').done(function (data) {
 var startX = 0;
 var moveX = 0
 var startScrollLeft = 0;
-$('.face-list').on('touchstart', function (e) {
+$('.face-list').on('touchstart', function(e) {
     startX = e.originalEvent.changedTouches[0].pageX;
     startScrollLeft = $(".face-list").scrollLeft();
 })
-$('.face-list').on('touchmove', function (e) {
-    e.preventDefault();
-    var list = $(".face-list");
-    moveX = e.originalEvent.changedTouches[0].pageX - startX;
-    list.scrollLeft(startScrollLeft - moveX)
-})
-// 切换类-动画
-$(".face-list").on('click', '.face-item', function () {
+$('.face-list').on('touchmove', function(e) {
+        e.preventDefault();
+        var list = $(".face-list");
+        moveX = e.originalEvent.changedTouches[0].pageX - startX;
+        list.scrollLeft(startScrollLeft - moveX)
+    })
+    // 切换类-动画
+$(".face-list").on('click', '.face-item', function() {
     $(".face-item-active").prop('class', 'face-item');
     $(this).prop('class', 'face-item-active');
 });
 
 
 // #result 图与左侧同步
-$('#facePreview').on('load', function () {
+$('#facePreview').on('load', function() {
     $('#result').css({ 'width': $('#facePreview').css('width'), 'height': $('#facePreview').css('height') })
 })
-$(window).on('resize', function () {
-    +-+
-        $('#result').css({ 'width': $('#facePreview').css('width'), 'height': $('#facePreview').css('height') })
+$(window).on('resize', function() {
+    + - +
+    $('#result').css({ 'width': $('#facePreview').css('width'), 'height': $('#facePreview').css('height') })
 })
 
 // 模板图切换
-$('.face-list').on('click', '.face-item', function (e) {
+$('.face-list').on('click', '.face-item', function(e) {
     var selected = $(this).find('img');
     $('#facePreview').prop('src', selected.prop('src'));
 })
@@ -44,14 +44,14 @@ $('.face-list').on('click', '.face-item', function (e) {
 // 两个状态 done 及 loading，loading 时在 #upload 的 change 回调中禁止访问
 var state = 'done';
 // 图片触发 file click
-$('#result').click(function (e) {
+$('#result').click(function(e) {
     e.preventDefault();
     if (state == 'loading') return;
     $('#upload').trigger('click')
 })
 
 // 图片改变后访问接口
-$('#upload').on('change', function () {
+$('#upload').on('change', function() {
     // 节流阀
     if (state == 'loading') return;
 
@@ -87,9 +87,9 @@ $('#upload').on('change', function () {
         data: formData,
         processData: false,
         contentType: false,
-        success: function (data) {
+        success: function(data) {
             // 成功后等待图片 loaded 后回调
-            $('#result').prop('src', data['img']).one('load', function () {
+            $('#result').prop('src', data['img']).one('load', function() {
                 // 开放节流阀
                 state = 'done';
 
@@ -103,7 +103,7 @@ $('#upload').on('change', function () {
                     // 注册回调
                     $('#shareBox').children().children().on('click', getShareCall({
                         icon: data['img'],
-                        link: 'https://gaolihai.top/faceWrap',
+                        link: 'https://gaolihai.cool/faceWrap',
                         title: '河北农业大学',
                         desc: '制作毕业照',
                         from: 'from',
@@ -111,7 +111,7 @@ $('#upload').on('change', function () {
                 } else {
                     //pc端
                     setShareInfo($('#shareBox').children().children(), {
-                        url: 'https://gaolihai.top/faceWrap',
+                        url: 'https://gaolihai.cool/faceWrap',
                         title: '河北农业大学',
                         desc: '制作毕业照',
                         summary: '制作毕业照',
@@ -122,11 +122,12 @@ $('#upload').on('change', function () {
                 }
 
                 // 加载模态框
-                $('#shareModal').modal('show').one('shown.bs.modal', function () {
-                    var image = new Image(); image.src = $('#result').prop('src');
+                $('#shareModal').modal('show').one('shown.bs.modal', function() {
+                    var image = new Image();
+                    image.src = $('#result').prop('src');
                     var canvas = $('#shareCanvas')[0];
-                    $(image).one('load', function () {
-                        drawBar(canvas, image, 50, function () {
+                    $(image).one('load', function() {
+                        drawBar(canvas, image, 50, function() {
                             var base64 = canvas.toDataURL('image/jpeg');
                             $('#shareImg').prop('src', base64);
                         });
@@ -134,7 +135,7 @@ $('#upload').on('change', function () {
                 });
             });
         },
-        error: function (err) {
+        error: function(err) {
             $('#loading').fadeOut();
             errHandler(err)
             state = 'done';
@@ -180,12 +181,12 @@ function setShareInfo(ele, option = { url: location.href, title: document.title,
 // 这里两层层闭包分别为
 // 1. 初始化 share 对象
 // 2. 传入一个特定的 options，用于返回闭包函数被回调时的参数
-window.getShareCall = (function () {
+window.getShareCall = (function() {
     window.nativeShare = new NativeShare();
 
     // 调用这一层返回一个用于回调的函数
-    return function (options) {
-        return function (e) {
+    return function(options) {
+        return function(e) {
             // 因为照顾 pc 端的分享功能，该 a 标签有 href 属性，所以必须阻止默认跳转行为
             e.preventDefault();
             nativeShare.call($(this).attr('data-target'), options);
