@@ -18,25 +18,26 @@
 
 最近在学的：
 
-<del>`Git` [廖雪峰的 Git 教程](https://www.liaoxuefeng.com/wiki/896043488029600)（已结束）;</del>
+`Java` 《Core Java I》;
 
-`Java` Java 核心技术 卷 I;
-
-`PHP` 在跟黑马的课;
+`PHP` ;
 
 `Vue.js` [啃文档](https://cn.vuejs.org/v2/guide/) + 黑马的课;
 
-`SQL` 《MySQL必知必会》 + [廖雪峰的 SQL 教程](https://www.liaoxuefeng.com/wiki/1177760294764384);
+`SQL` 《MySQL必知必会》;
 
-`数据结构与算法` [Course 普林斯顿的《算法》](https://www.coursera.org/learn/algorithms-part1/home/welcome) + 《算法竞赛入门经典》 - 紫皮书;
+`操作系统` 《Operating System : Three Easy Pieces》;
 
-`Linux` [实验楼的 Linux 课程](https://www.lanqiao.cn/courses/1653)
+`数据结构与算法` [Course 普林斯顿的《算法》](https://www.coursera.org/learn/algorithms-part1/home/welcome) + 《算法竞赛入门经典》 - 刘汝佳;
+
+`Linux` 《The Linux Command Line》 + [实验楼的 Linux 课程](https://www.lanqiao.cn/courses/1653);
 
 （还在用 win server 的菜狗 😨）（幻想有一天可以在 Linux 上部署😃）;
 
-`计算机组成原理` [MIT 公开课](https://www.bilibili.com/video/BV1gk4y1B7VE) --> [课程原址 edX ](https://courses.edx.org/courses/course-v1:MITx+6.004.1x_3+3T2016/course/)
+~~`Git` [廖雪峰的 Git 教程](https://www.liaoxuefeng.com/wiki/896043488029600)（已结束）;~~
 
-（幻想有一天可以从底层搞一台计算机，太浪漫了）;
+~~`计算机组成原理` [MIT 公开课](https://www.bilibili.com/video/BV1gk4y1B7VE) --> [课程原址 edX ](https://courses.edx.org/courses/course-v1:MITx+6.004.1x_3+3T2016/course/)（已结束）~~
+
 
 <br/>
 
