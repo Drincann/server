@@ -26,7 +26,7 @@
 
 `SQL` 《MySQL必知必会》;
 
-`操作系统` 《Operating System : Three Easy Pieces》;
+`操作系统` 《Operating System : Three Easy Pieces》[作业代码仓库](https://github.com/GAOSILIHAI/ostep-homework);
 
 `数据结构与算法` [Course 普林斯顿的《算法》](https://www.coursera.org/learn/algorithms-part1/home/welcome) + 《算法竞赛入门经典》 - 刘汝佳;
 
