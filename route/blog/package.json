@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "art-template": "^4.13.2",
-    "bcrypt": "^4.0.1",
+    "bcrypt": "^5.0.0",
     "express": "^4.17.1",
     "express-art-template": "^1.0.1",
     "express-session": "^1.17.0",
