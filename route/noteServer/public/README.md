@@ -45,7 +45,7 @@
 
 |                                                   |
 | ------------------------------------------------- |
-| [主站](https://gaolihai.cool/note) |
+| [主站](https://gaolihai.cool) |
 | [知乎](https://www.zhihu.com/people/gao-jun-kang) |
 | [GitHub](https://github.com/GAOSILIHAI)           |
 | [CSDN](https://blog.csdn.net/qq_16181837) |
