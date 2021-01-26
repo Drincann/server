@@ -63,7 +63,7 @@ $.ajax({
             api.extendMarkedRenderer((render) => {
                 let oldProcess = render.code.bind(render);
                 render.code = function(code, language, n, i) {
-                    if (code.match(/^sequenceDiagram/) || code.match(/^graph/)) {
+                    if (language == 'mermaid') {
                         // var graph = mermaid.mermaidAPI.render('graphDiv', code);
                         return '<div class="mermaid" >' + code + '</div>';
                     } else {
