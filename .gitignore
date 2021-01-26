@@ -3,3 +3,4 @@ node_modules/*
 .vscode/*
 route/noteServer/public/doc/*
 route/submit/public/uploads/*
+https/*
