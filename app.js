@@ -15,15 +15,15 @@ module.exports = app;
 
 // 一级路由
 const router = {
-    db: require(path.join(__dirname, 'route', 'db', 'app')),
-    template: require(path.join(__dirname, 'route', 'template', 'app')),
-    blog: require(path.join(__dirname, 'route', 'blog', 'app')),
+    // db: require(path.join(__dirname, 'route', 'db', 'app')),
+    // template: require(path.join(__dirname, 'route', 'template', 'app')),
+    // blog: require(path.join(__dirname, 'route', 'blog', 'app')),
     todo: require('./route/todo/app'),
-    ali: require('./route/alibaixiu/app'),
+    // ali: require('./route/alibaixiu/app'),
     faceWrap: require('./route/faceWrap/app'),
     // query: require('./route/query/app'), // 接口失效
     noteServer: require('./route/noteServer/app'),
-    checkIn: require('./route/checkIn/app'),
+    // checkIn: require('./route/checkIn/app'),
     submit: require('./route/submit/app'),
 };
 
@@ -34,15 +34,15 @@ app.use(require('./middleware/httpsRedirect'));
 app.use(express.static(path.join(__dirname, '../', 'Web')));
 
 // 路由
-app.use('/db', router.db);
-app.use('/template', router.template);
-app.use('/blog', router.blog);
+// app.use('/db', router.db);
+// app.use('/template', router.template);
+// app.use('/blog', router.blog);
 app.use('/todo', router.todo);
-app.use('/ali', router.ali);
+// app.use('/ali', router.ali);
 app.use('/faceWrap', router.faceWrap);
 // app.use('/query', router.query); // 接口失效
 app.use('/note', router.noteServer);
-app.use('/checkIn', router.checkIn);
+// app.use('/checkIn', router.checkIn);
 app.use('/submit', router.submit);
 // 404
 app.use(require('./route/notFound'));
