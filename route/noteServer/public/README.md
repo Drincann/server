@@ -24,7 +24,7 @@
 
 `线性代数 - 复修` 张宇基础 30 讲，这学期课少刷一波分;
 
-`Java/Java Web` 《Core Java I》 +  + [黑马 Java Web 入门](https://www.bilibili.com/video/BV1mE411h7Co);
+`Java/Java Web` 《Core Java I》 + [黑马 Java Web 入门](https://www.bilibili.com/video/BV1mE411h7Co);
 
 `Vue.js` [啃文档](https://cn.vuejs.org/v2/guide/);
 
