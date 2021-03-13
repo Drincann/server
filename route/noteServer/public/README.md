@@ -8,7 +8,7 @@
 
 <span style="font-size:50px;">我,</span>某双非本科、写代码专业在读，热爱技术，喜欢思考，是一只快乐、上进的调包侠。
 
-很懒，懒到没有搭博客的欲望。
+很懒，懒到没有手搭博客的欲望。
 
 很菜，菜到只能调调包才能维持得了生活这样子。
 
@@ -16,15 +16,17 @@
 
 最近在干的：
 
-`Mirai-js`，开发 Node.js 平台下的 QQ 机器人框架，Github --> [Mirai-js](https://github.com/drinkal/Mirai-js)。
+`Mirai-js`，开发 Node.js 平台下的 QQ 机器人框架，Github --> [Mirai-js](https://github.com/Drincann/Mirai-js)。
+
+`angie`，准备尝试开发一个 Node.js Web 框架，读一读流行框架源码 --> [angie](https://github.com/Drincann/angie)。
 
 最近在学的：
 
-`Java` 《Core Java I》;
+`线性代数 - 复修` 张宇基础 30 讲，这学期课少刷一波分;
 
-`PHP` ;
+`Java/Java Web` 《Core Java I》 + 黑马的课;
 
-`Vue.js` [啃文档](https://cn.vuejs.org/v2/guide/) + 黑马的课;
+`Vue.js` [啃文档](https://cn.vuejs.org/v2/guide/) + [黑马 Java Web 入门](https://www.bilibili.com/video/BV1mE411h7Co);
 
 `SQL` 《MySQL必知必会》;
 
@@ -32,9 +34,9 @@
 
 `数据结构与算法` [Course 普林斯顿的《算法》](https://www.coursera.org/learn/algorithms-part1/home/welcome) + 《算法竞赛入门经典》 - 刘汝佳;
 
-`Linux` 《The Linux Command Line》 + [实验楼的 Linux 课程](https://www.lanqiao.cn/courses/1653);
+`Linux` 《The Linux Command Line》;
 
-（还在用 win server 的菜狗 😨）（幻想有一天可以在 Linux 上部署😃）;
+`JavaScript 生态` 《JavaScript 高级程序设计》;
 
 ~~`Git` [廖雪峰的 Git 教程](https://www.liaoxuefeng.com/wiki/896043488029600)（已结束）;~~
 
